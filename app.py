@@ -410,7 +410,7 @@ else:
         st.markdown(f"""
         <div class="metric-card {'safe' if safe_cov0 else 'critical'}">
             <div class="metric-title">Coverage (0%)</div>
-            <div class="metric-value">{cov_0:.1f} hari</div>
+            <div class="metric-value">{safe_cov0:.1f} hari</div>
             <div class="metric-desc">Ketahanan stok tanpa kiriman baru</div>
         </div>
         """, unsafe_allow_html=True)
@@ -419,7 +419,7 @@ else:
         st.markdown(f"""
         <div class="metric-card {'safe' if safe_cov100 else 'critical'}">
             <div class="metric-title">Coverage (100%)</div>
-            <div class="metric-value">{cov_100:.1f} hari</div>
+            <div class="metric-value">{safe_cov100:.1f} hari</div>
             <div class="metric-desc">Ketahanan stok jika ada kedatangan</div>
         </div>
         """, unsafe_allow_html=True)
