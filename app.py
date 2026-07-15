@@ -399,7 +399,7 @@ else:
         
     with col_kpi3:
         st.markdown(f"""
-        <div class="metric-card {'safe' if avg_cov_0 >= 30 else 'warning'}">
+        <div class="metric-card {'safe' if cov_0 >= 'Safety Stock (hari)' else 'critical'}">
             <div class="metric-title">Coverage (0%)</div>
             <div class="metric-value">{cov_0:.1f} hari</div>
             <div class="metric-desc">Ketahanan stok tanpa kiriman baru</div>
@@ -407,7 +407,7 @@ else:
         """, unsafe_allow_html=True)
     with col_kpi4:
         st.markdown(f"""
-        <div class="metric-card {'safe' if avg_cov_0 >= 30 else 'warning'}">
+        <div class="metric-card {'safe' if cov_100 >= 'Safety Stock (hari)' else 'critical'}">
             <div class="metric-title">Coverage (0%)</div>
             <div class="metric-value">{cov_100:.1f} hari</div>
             <div class="metric-desc">Ketahanan stok jika ada kedatangan</div>
