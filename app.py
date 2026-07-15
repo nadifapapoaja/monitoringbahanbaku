@@ -79,7 +79,7 @@ st.markdown(f"""
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         margin-bottom: 1rem;
         transition: transform 0.2s ease-in-out;
-        height: 170px;
+        height: 250px;
         display: flex;
         flex-direction: column;
         justify-content: center;
