@@ -370,13 +370,22 @@ else:
         """, unsafe_allow_html=True)
 
     # ------------------ KPI WIDGETS ------------------
-    col_kpi1, col_kpi2, col_kpi3, col_kpi4 = st.columns(4)
+    col_kpi1, col_kpi2, col_kpi3, col_kpi4, col_kpi4 = st.columns(5)
     
     # Calculate values
     total_stok_100 = df_date_filtered['100% Kedatangan'].sum()
     total_stok_0 = df_date_filtered['0% Kedatangan'].sum()
-    cov_100 = df_date_filtered['Coverage days (100%)']
-    cov_0 = df_date_filtered['Coverage days (0%)']
+    
+    # True jika semua material masih di atas safety stock
+    safe_cov0 = (
+        df_date_filtered["Coverage days (0%)"] >=
+        df_date_filtered["Safety Stock (hari)"]
+        ).all()
+
+    safe_cov100 = (
+        df_date_filtered["Coverage days (100%)"] >=
+        df_date_filtered["Safety Stock (hari)"]
+    ).all()
     critical_count = len(set(critical_100 + critical_0))
     
     with col_kpi1:
@@ -399,16 +408,17 @@ else:
         
     with col_kpi3:
         st.markdown(f"""
-        <div class="metric-card {'safe' if cov_0 >= 'Safety Stock (hari)' else 'critical'}">
+        <div class="metric-card {'safe' if safe_cov0 else 'critical'}">
             <div class="metric-title">Coverage (0%)</div>
             <div class="metric-value">{cov_0:.1f} hari</div>
             <div class="metric-desc">Ketahanan stok tanpa kiriman baru</div>
         </div>
         """, unsafe_allow_html=True)
+
     with col_kpi4:
         st.markdown(f"""
-        <div class="metric-card {'safe' if cov_100 >= 'Safety Stock (hari)' else 'critical'}">
-            <div class="metric-title">Coverage (0%)</div>
+        <div class="metric-card {'safe' if safe_cov100 else 'critical'}">
+            <div class="metric-title">Coverage (100%)</div>
             <div class="metric-value">{cov_100:.1f} hari</div>
             <div class="metric-desc">Ketahanan stok jika ada kedatangan</div>
         </div>
