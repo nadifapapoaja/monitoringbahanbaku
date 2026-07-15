@@ -375,8 +375,8 @@ else:
     # Calculate values
     total_stok_100 = df_date_filtered['100% Kedatangan'].sum()
     total_stok_0 = df_date_filtered['0% Kedatangan'].sum()
-    avg_cov_100 = df_date_filtered['Coverage days (100%)'].mean()
-    avg_cov_0 = df_date_filtered['Coverage days (0%)'].mean()
+    cov_100 = df_date_filtered['Coverage days (100%)']
+    cov_0 = df_date_filtered['Coverage days (0%)']
     critical_count = len(set(critical_100 + critical_0))
     
     with col_kpi1:
@@ -393,20 +393,28 @@ else:
         <div class="metric-card warning">
             <div class="metric-title">Total Stok (0% Kedatangan)</div>
             <div class="metric-value">{total_stok_0:,.0f} ton</div>
-            <div class="metric-desc">Stok fisik aktual tanpa kiriman baru</div>
+            <div class="metric-desc">Proyeksi stok jika tanpa kiriman baru</div>
         </div>
         """, unsafe_allow_html=True)
         
     with col_kpi3:
         st.markdown(f"""
         <div class="metric-card {'safe' if avg_cov_0 >= 30 else 'warning'}">
-            <div class="metric-title">Rata-rata Coverage (0%)</div>
-            <div class="metric-value">{avg_cov_0:.1f} hari</div>
+            <div class="metric-title">Coverage (0%)</div>
+            <div class="metric-value">{cov_0:.1f} hari</div>
             <div class="metric-desc">Ketahanan stok tanpa kiriman baru</div>
         </div>
         """, unsafe_allow_html=True)
-        
     with col_kpi4:
+        st.markdown(f"""
+        <div class="metric-card {'safe' if avg_cov_0 >= 30 else 'warning'}">
+            <div class="metric-title">Coverage (0%)</div>
+            <div class="metric-value">{cov_100:.1f} hari</div>
+            <div class="metric-desc">Ketahanan stok jika ada kedatangan</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with col_kpi5:
         st.markdown(f"""
         <div class="metric-card {'safe' if critical_count == 0 else 'critical'}">
             <div class="metric-title">Material Risiko Kritis</div>
