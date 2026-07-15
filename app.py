@@ -370,7 +370,7 @@ else:
         """, unsafe_allow_html=True)
 
     # ------------------ KPI WIDGETS ------------------
-    col_kpi1, col_kpi2, col_kpi3, col_kpi4, col_kpi4 = st.columns(5)
+    col_kpi1, col_kpi2, col_kpi3, col_kpi4, col_kpi5 = st.columns(5)
     
     # Calculate values
     total_stok_100 = df_date_filtered['100% Kedatangan'].sum()
